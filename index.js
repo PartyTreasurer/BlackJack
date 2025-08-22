@@ -1,46 +1,65 @@
-let homeScoreBtnOne = document.getElementById("home-score-btn-1")
-let homeScoreEl =document.getElementById("home_sum")
-let homeScore = 0
-
-function increaseHomeScoreOne(){
-    homeScore += 1
-    homeScoreEl.textContent = homeScore
+let player = {
+    name: "Leonidas",
+    chips: 200
 }
 
-let homeScoreBtnTwo = document.getElementById("home-score-btn-2")
+let cards = []
+let sum = 0
+let hasBlackJack = false
+let isAlive = false
+let message = ""
+let messageEl = document.getElementById("message-el")
+let sumEl = document.getElementById("sum-el")
+let cardsEl = document.getElementById("cards-el")
+let playerEl = document.getElementById("player-el")
 
-function increaseHomeScoreTwo(){
-    homeScore += 2
-    homeScoreEl.textContent = homeScore
+playerEl.textContent = player.name + ": $" + player.chips
+
+function getRandomCard() {
+    let randomNumber = Math.floor( Math.random()*13 ) + 1
+    if (randomNumber > 10) {
+        return 10
+    } else if (randomNumber === 1) {
+        return 11
+    } else {
+        return randomNumber
+    }
 }
 
-let homeScoreBtnThree = document.getElementById("home-score-btn-3")
+function startGame() {
+    isAlive = true
+    let firstCard = getRandomCard()
+    let secondCard = getRandomCard()
+    cards = [firstCard, secondCard]
+    sum = firstCard + secondCard
+    renderGame()
+}
 
-function increaseHomeScoreThree(){
-    homeScore += 3
-    homeScoreEl.textContent = homeScore
+function renderGame() {
+    cardsEl.textContent = "Cards: "
+    for (let i = 0; i < cards.length; i++) {
+        cardsEl.textContent += cards[i] + " "
+    }
+    
+    sumEl.textContent = "Sum: " + sum
+    if (sum <= 20) {
+        message = "Do you want to draw a new card?"
+    } else if (sum === 21) {
+        message = "You've got Blackjack!"
+        hasBlackJack = true
+    } else {
+        message = "You're out of the game!"
+        isAlive = false
+    }
+    messageEl.textContent = message
 }
 
 
-let guestScoreBtnOne = document.getElementById("guest-score-btn-1")
-let guestScoreEl =document.getElementById("guest_sum")
-let guestScore = 0
-
-function increaseGuestScoreOne(){
-    guestScore += 1
-    guestScoreEl.textContent = guestScore
-}
-
-let guestScoreBtnTwo = document.getElementById("guest-score-btn-2")
-
-function increaseGuestScoreTwo(){
-    guestScore += 2
-    guestScoreEl.textContent = guestScore
-}
-
-let guestScoreBtnThree = document.getElementById("guest-score-btn-3")
-
-function increaseGuestScoreThree(){
-    guestScore += 3
-    guestScoreEl.textContent = guestScore
+function newCard() {
+    if (isAlive === true && hasBlackJack === false) {
+        let card = getRandomCard()
+        sum += card
+        cards.push(card)
+        renderGame()        
+    }
 }
