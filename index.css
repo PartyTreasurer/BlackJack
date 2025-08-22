@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+
+.home_points {
+    display: inline-flex;
+    justify-content: baseline;
+    margin-right: 29px;
+    margin-left: 10px;
+}
+
+.guest_points {
+    display:inline-flex;
+    justify-content:end;
+}
+
+button {
+    margin: 4px;
+    background-color:darkblue;
+    color: white;
+    border-radius: 5px;
+}
+
+#home_sum {
+    display: inline-flex;
+    justify-content: baseline;
+    margin-right: 80px;
+    margin-left: 40px;
+    color: red;
+    background-color: black;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+#guest_sum {
+    display:inline-flex;
+    justify-content:end;
+    color: red;
+    background-color: black;
+    padding: 25px;
+    border-radius: 5px;
+    
+}
+body {
+    background-color:darkblue;
+}
+
+
+
